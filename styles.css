@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    position: relative;
+}
+
+.character {
+    width: 100px;
+    height: 100px;
+    background: url('Assets/042.png') no-repeat center/cover;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -100%);
+}
+
+.links {
+    display: flex;
+    gap: 20px;
+}
+
+.link {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.link:hover {
+    background: #0056b3;
+}
