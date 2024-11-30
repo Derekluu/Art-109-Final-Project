@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { src: 'Assets/bite7.png', duration: 100 },
         { src: 'Assets/bite8.png', duration: 100 },
         { src: 'Assets/bite9.png', duration: 100 },
+        { src: 'Assets/bite10.png', duration: 3000 },
         { src: 'Assets/bite10.png', duration: 5000 }
     ];
 
