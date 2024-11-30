@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let y = window.innerHeight / 2 - 25; // Initial Y position
     const step = 8; // Horizontal movement step in pixels
     const gravity = 1; // Gravity force (in pixels per frame)
-    const jumpStrength = -50; // Jump strength (negative for upward movement)
+    const jumpStrength = -30; // Jump strength (negative for upward movement)
     let velocityY = 0; // Current vertical velocity
     const keys = {}; // Object to track pressed keys
-    const groundLevel = window.innerHeight; // aPosition of the ground (bottom of the screen)
+    const groundLevel = window.innerHeight+5; // aPosition of the ground (bottom of the screen)
 
 
 
@@ -60,10 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Handle horizontal movement
         if (keys['a']) {
-            x = Math.max(0, x - step); // Move left
+            x = Math.max(33, x - step); // Move left
         }
         if (keys['d']) {
-            x = Math.min(window.innerWidth - 50, x + step); // Move right
+            x = Math.min(window.innerWidth - 32, x + step); // Move right
         }
 
         // Update character position

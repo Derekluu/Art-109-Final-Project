@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const imgElement = document.getElementById('animation');
     const images = [
-        { src: 'Assets/bite1.png', duration: 5000 },
+        { src: 'Assets/bite1.png', duration: 3000 },
         { src: 'Assets/bite2.png', duration: 100 },
         { src: 'Assets/bite3.png', duration: 100 },
         { src: 'Assets/bite4.png', duration: 100 },
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(playAnimation, duration); // Schedule next image
         } else {
             // Redirect after the last image
-            window.location.href = "index.html"; // Replace with your desired URL
+            window.location.href = "home.html"; // Replace with your desired URL
         }
     }
 
