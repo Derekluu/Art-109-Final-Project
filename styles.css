@@ -4,6 +4,7 @@ body {
     background-color: #f0f0f0;
     overflow: hidden;
     position: relative;
+    cursor: none;
 }
 
 .character {
@@ -19,6 +20,7 @@ body {
 .links {
     display: flex;
     gap: 20px;
+    cursor: none;
 }
 
 .link {
@@ -30,8 +32,9 @@ body {
     user-select: none;
     text-align: center;
     transition: background 0.3s ease;
+    cursor: none;
 }
 
 .link:hover {
-    background: #0056b3;
+    background: #007bff;
 }
