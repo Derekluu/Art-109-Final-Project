@@ -15,6 +15,8 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -100%);
+    cursor: none;
+
 }
 
 .links {
@@ -37,4 +39,6 @@ body {
 
 .link:hover {
     background: #007bff;
+    cursor: none;
+
 }
