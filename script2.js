@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const imgElement = document.getElementById('animation');
     const images = [
-        { src: 'Assets/bite1.png', duration: 2000 },
+        { src: 'Assets/bite1.png', duration: 1000 },
         { src: 'Assets/bite2.png', duration: 100 },
         { src: 'Assets/bite3.png', duration: 100 },
         { src: 'Assets/bite4.png', duration: 100 },
@@ -15,6 +15,22 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     let currentImageIndex = 0;
+
+    // Preload all images
+    function preloadImages(imageArray, callback) {
+        let loadedImages = 0;
+
+        imageArray.forEach(image => {
+            const img = new Image();
+            img.src = image.src;
+            img.onload = () => {
+                loadedImages++;
+                if (loadedImages === imageArray.length) {
+                    callback(); // Start animation when all images are preloaded
+                }
+            };
+        });
+    }
 
     function playAnimation() {
         const { src, duration } = images[currentImageIndex];
@@ -30,5 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    playAnimation(); // Start the animation
+    // Start preloading images and then play the animation
+    preloadImages(images, playAnimation);
 });
