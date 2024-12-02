@@ -1,90 +1,150 @@
 document.addEventListener('DOMContentLoaded', () => {
     const character = document.querySelector('.character');
     const links = document.querySelectorAll('.link');
+    const platforms = document.querySelectorAll('.platform-zone');
 
-    let x = window.innerWidth / 2 - 25; // Initial X position
+    let x = window.innerWidth / 2 - 25;  // Initial X position
     let y = window.innerHeight / 2 - 25; // Initial Y position
     const step = 8; // Horizontal movement step in pixels
     const gravity = 1; // Gravity force (in pixels per frame)
     const jumpStrength = -30; // Jump strength (negative for upward movement)
     let velocityY = 0; // Current vertical velocity
     const keys = {}; // Object to track pressed keys
-    const groundLevel = window.innerHeight+5; // aPosition of the ground (bottom of the screen)
+    let onGround = false; // To check if character is on a platform or ground
 
+    // Make sure to adjust the ground level and body height for scrolling
+    const groundLevel = document.documentElement.scrollHeight - character.offsetHeight;
+    document.body.style.height = `${document.documentElement.scrollHeight}px`;
 
-
-    
     // Set the initial position
     character.style.left = `${x}px`;
     character.style.top = `${y}px`;
 
-    // Check for collision between character and links
-    function checkCollision() {
+    // Check for collision with links
+    function checkCollisionWithLinks() {
         const charRect = character.getBoundingClientRect();
-
         links.forEach(link => {
             const linkRect = link.getBoundingClientRect();
-
-            // Check if the rectangles overlap
             if (
                 charRect.left < linkRect.right &&
                 charRect.right > linkRect.left &&
                 charRect.top < linkRect.bottom &&
                 charRect.bottom > linkRect.top
             ) {
-                // Navigate to the link's URL
                 window.location.href = link.dataset.link;
+            }
+        });
+    }
+
+    // Check for collision with platforms
+    function checkCollisionWithPlatforms() {
+        onGround = false; // Reset ground status
+
+        platforms.forEach(platform => {
+            // Get platform's absolute position
+            const platformTop = platform.offsetTop;
+            const platformBottom = platformTop + platform.offsetHeight;
+            const platformLeft = platform.offsetLeft;
+            const platformRight = platformLeft + platform.offsetWidth;
+
+            // Character's absolute position and hitbox dimensions
+            const characterTop = y;
+            const characterBottom = y + character.offsetHeight;
+            const characterLeft = x - 30;
+            const characterRight = x + character.offsetWidth - 70;
+
+            // Top collision (landing on platform)
+            if (
+                characterRight > platformLeft &&
+                characterLeft < platformRight &&
+                characterBottom <= platformTop + velocityY &&
+                characterBottom + velocityY >= platformTop &&
+                velocityY >= 0
+            ) {
+                y = platformTop - character.offsetHeight;
+                velocityY = 0;
+                onGround = true;
+            }
+
+            // Bottom collision (hitting the underside of the platform)
+            if (
+                characterRight > platformLeft &&
+                characterLeft < platformRight &&
+                characterTop >= platformBottom + velocityY &&
+                characterTop + velocityY <= platformBottom &&
+                velocityY < 0
+            ) {
+                y = platformBottom;
+                velocityY = 1; // Apply a slight downward force to simulate falling off
+            }
+
+            // Left collision (Character's right side collides with platform's left side)
+            if (
+                characterBottom > platformTop &&
+                characterTop < platformBottom &&
+                characterRight > platformLeft &&
+                characterLeft < platformLeft && // Check if character is on the left of the platform
+                characterRight - step <= platformLeft // Check if character's right side will collide with platform's left side
+            ) {
+                x = platformLeft - character.offsetWidth + 70; // Stop movement and align character to platform
+            }
+
+            // Right collision (Character's left side collides with platform's right side)
+            if (
+                characterBottom > platformTop &&
+                characterTop < platformBottom &&
+                characterLeft < platformRight &&
+                characterRight > platformRight && // Check if character is on the right of the platform
+                characterLeft + step >= platformRight // Check if character's left side will collide with platform's right side
+            ) {
+                x = platformRight + 30; // Stop movement and align character to platform
             }
         });
     }
 
     // Handle gravity and movement
     function updatePosition() {
-        // Apply gravity to vertical velocity
-        velocityY += gravity;
-
-        // Update Y position based on velocity
+        if (!onGround) velocityY += gravity;
         y += velocityY;
 
-        // Check if character hits the ground
-        if (y > groundLevel) {
-            y = groundLevel; // Reset position to ground level
-            velocityY = 0; // Stop downward movement
+        if (y >= groundLevel) {
+            y = groundLevel;
+            velocityY = 0;
+            onGround = true;
         }
 
-        // Check for jumping
-        if (keys['w'] && y === groundLevel) {
-            console.log('jump')
-            velocityY = jumpStrength; // Apply upward velocity
+        if ((keys['w'] || keys['W']) && onGround) {
+            velocityY = jumpStrength;
+            onGround = false;
         }
 
-        // Handle horizontal movement
-        if (keys['a']) {
-            x = Math.max(33, x - step); // Move left
-        }
-        if (keys['d']) {
-            x = Math.min(window.innerWidth - 32, x + step); // Move right
-        }
+        if (keys['a'] || keys['A']) x = Math.max(30, x - step);
+        if (keys['d'] || keys['D']) x = Math.min(window.innerWidth - 30, x + step);
 
-        // Update character position
         character.style.left = `${x}px`;
         character.style.top = `${y}px`;
 
-        // Check for collision
-        checkCollision();
+        checkCollisionWithLinks();
+        checkCollisionWithPlatforms();
+
+        scrollToKeepCharacterInView(); // Ensure the page scrolls with character
     }
 
-    // Listen for keydown events to mark keys as active
-    document.addEventListener('keydown', (event) => {
-        keys[event.key] = true;
-    });
+    function scrollToKeepCharacterInView() {
+        const charRect = character.getBoundingClientRect();
+        const viewportBottom = window.innerHeight;
 
-    // Listen for keyup events to mark keys as inactive
-    document.addEventListener('keyup', (event) => {
-        keys[event.key] = false;
-    });
+        if (charRect.bottom > viewportBottom - 50) {
+            window.scrollBy(0, charRect.bottom - viewportBottom + 50); // Scroll down
+        }
+        if (charRect.top < 100) {
+            window.scrollBy(0, charRect.top - 100); // Scroll up if needed
+        }
+    }
 
-    // Continuously update the game state
+    document.addEventListener('keydown', (event) => keys[event.key] = true);
+    document.addEventListener('keyup', (event) => keys[event.key] = false);
+
     function gameLoop() {
         updatePosition();
         requestAnimationFrame(gameLoop);

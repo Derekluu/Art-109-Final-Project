@@ -3,13 +3,14 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full viewport height */
-    margin: 0;
+    margin: 50;
 }
 
 img1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;  /* Stack items vertically */
 }
 
 img1 img {

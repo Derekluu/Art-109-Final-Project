@@ -14,7 +14,7 @@ body {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -100%);
+    transform: translate(-50%, 0%);
     cursor: none;
 
 }
@@ -40,4 +40,10 @@ body {
 .link:hover {
     background: #007bff;
     cursor: none;
+}
+
+.platform-zone {
+    position: absolute;
+    background-color: blue;
+    height: 20px;
 }

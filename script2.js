@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const imgElement = document.getElementById('animation');
     const images = [
-        { src: 'Assets/bite1.png', duration: 3000 },
+        { src: 'Assets/bite1.png', duration: 1000 },
         { src: 'Assets/bite2.png', duration: 100 },
         { src: 'Assets/bite3.png', duration: 100 },
         { src: 'Assets/bite4.png', duration: 100 },
