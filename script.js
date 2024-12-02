@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const character = document.querySelector('.character');
     const links = document.querySelectorAll('.link');
     const platforms = document.querySelectorAll('.platform-zone');
-
+    //test
     let x = window.innerWidth / 2 - 25;  // Initial X position
     let y = window.innerHeight / 2 - 25; // Initial Y position
     const step = 8; // Horizontal movement step in pixels
