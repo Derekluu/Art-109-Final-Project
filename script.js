@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let x = window.innerWidth / 2 - 25;  // Initial X position
     let y = window.innerHeight / 2 - 25; // Initial Y position
     const step = 8; // Horizontal movement step in pixels
-    const gravity = 1; // Gravity force (in pixels per frame)
-    const jumpStrength = -25; // Jump strength (negative for upward movement)
+    let gravity = 1; // Gravity force (in pixels per frame)
+    let jumpStrength = -25; // Jump strength (negative for upward movement)
     let velocityY = 0; // Current vertical velocity
     const keys = {}; // Object to track pressed keys
     let onGround = false; // To check if character is on a platform or ground
@@ -20,13 +20,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (url.includes("page1.html")) {
         x = 800; // Spawn coordinates for page1.html
+        y = 100;
+    }    
+     else if (url.includes("page1-1.html")) {
+        x = 800; // Spawn coordinates for page1.html
         y = 200;
     } else if (url.includes("page2.html")) {
-        x = 300; // Spawn coordinates for page2.html
+        x = 300;
         y = 400;  
-     } else if (url.includes("home.html" || "Home.html")) {
-            x = 100; // Spawn coordinates for page2.html
+    } else if (url.includes("page2-1.html")) {
+        x = 300;
+        y = 400;  
+    } else if (url.includes("home.html")) {
+            x = 100; 
             y = 100;
+    } else if (url.includes("page3.html")) {
+        x = window.innerWidth / 2 - 25;
+        y = 400;
+        gravity = 0.1;
+        jumpStrength = -15
+    } else if (url.includes("page3-1.html")) {
+        x = window.innerWidth / 2 - 25;
+        y = 400;
+        gravity = 0.1;
+        jumpStrength = -15
+    } else if (url.includes("page4.html")) {
+        x = 100; 
+        y = 100;
+    } else if (url.includes("page4-1.html")) {
+        x = 100; 
+        y = 100;
     } else {
         x = window.innerWidth / 2 - 25; // Default position
         y = window.innerHeight / 2 - 25;

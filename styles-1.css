@@ -5,13 +5,11 @@ body {
     background-color: #f3f3f3;
     overflow: hidden;
     position: relative;
-    cursor: none;
 }
 
 .content {
     margin-left: 5%;
     margin-right: 5%;
-    cursor: none;
 }
 .character {
     width: 100px;
@@ -21,7 +19,6 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, 0%);
-    cursor: none;
 
 }
 
@@ -44,7 +41,6 @@ footer {
     user-select: none;
     text-align: center;
     transition: background 0.3s ease;
-    cursor: none;
 }
 
 .dialouge {
@@ -55,7 +51,6 @@ footer {
 .links {
     display: flex;
     gap: 0px;
-    cursor: none;
 }
 
 .link {
@@ -67,12 +62,28 @@ footer {
     user-select: none;
     text-align: center;
     transition: background 0.3s ease;
-    cursor: none;
+    
 }
 
 .link:hover {
-    background: rgb(65, 65, 65);
-    cursor: none;
+    background: rgb(116, 110, 93);
+}
+
+.link:visited {
+    text-decoration: none;
+    color: white;
+    background: rgb(65, 65, 65); /* Match the unvisited state */
+}
+a {
+    text-decoration: none;
+    color: white;
+    background: rgba(65, 65, 65, 0); /* Match the unvisited state */
+}
+
+a:visited {
+    text-decoration: none;
+    color: white;
+    background: rgba(65, 65, 65, 0); /* Match the unvisited state */
 }
 
 .platform-zone {
@@ -90,10 +101,4 @@ footer {
     flex: 1; /* Makes columns equal width */
     padding: 20px;
 
-}
-
-.link:visited {
-    text-decoration: none;
-    color: white;
-    background: rgb(65, 65, 65); /* Match the unvisited state */
 }
