@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let y = window.innerHeight / 2 - 25; // Initial Y position
     const step = 8; // Horizontal movement step in pixels
     const gravity = 1; // Gravity force (in pixels per frame)
-    const jumpStrength = -30; // Jump strength (negative for upward movement)
+    const jumpStrength = -25; // Jump strength (negative for upward movement)
     let velocityY = 0; // Current vertical velocity
     const keys = {}; // Object to track pressed keys
     let onGround = false; // To check if character is on a platform or ground
@@ -16,10 +16,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const groundLevel = document.documentElement.scrollHeight - character.offsetHeight;
     document.body.style.height = `${document.documentElement.scrollHeight}px`;
 
+    const url = window.location.pathname; // Get the current page's path
+
+    if (url.includes("page1.html")) {
+        x = 800; // Spawn coordinates for page1.html
+        y = 200;
+    } else if (url.includes("page2.html")) {
+        x = 300; // Spawn coordinates for page2.html
+        y = 400;  
+     } else if (url.includes("home.html" || "Home.html")) {
+            x = 100; // Spawn coordinates for page2.html
+            y = 100;
+    } else {
+        x = window.innerWidth / 2 - 25; // Default position
+        y = window.innerHeight / 2 - 25;
+    }
+    
     // Set the initial position
     character.style.left = `${x}px`;
     character.style.top = `${y}px`;
 
+    
     // Check for collision with links
     function checkCollisionWithLinks() {
         const charRect = character.getBoundingClientRect();
@@ -134,11 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const charRect = character.getBoundingClientRect();
         const viewportBottom = window.innerHeight;
 
-        if (charRect.bottom > viewportBottom - 50) {
-            window.scrollBy(0, charRect.bottom - viewportBottom + 50); // Scroll down
+        if (charRect.bottom > viewportBottom - 200) {
+            window.scrollBy(0, charRect.bottom - viewportBottom + 200); // Scroll down
         }
-        if (charRect.top < 100) {
-            window.scrollBy(0, charRect.top - 100); // Scroll up if needed
+        if (charRect.top < 300) {
+            window.scrollBy(0, charRect.top - 300); // Scroll up if needed
         }
     }
 

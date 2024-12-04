@@ -1,12 +1,17 @@
 body {
     margin: 0;
+
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #f3f3f3;
     overflow: hidden;
     position: relative;
     cursor: none;
 }
-
+.content {
+    margin-left: 5%;
+    margin-right: 5%;
+    cursor: none;
+}
 .character {
     width: 100px;
     height: 100px;
@@ -19,18 +24,45 @@ body {
 
 }
 
+header {
+    background: #1f1f1f;
+}
+footer {
+    background: #1f1f1f;
+    color: white;
+}
+.title{
+    text-align: center;
+}
+.headerTitle {
+    margin: 1%;
+    padding: 10px 5%;
+    background: rgb(65, 65, 65);
+    color: white;
+    border-radius: 1px;
+    user-select: none;
+    text-align: center;
+    transition: background 0.3s ease;
+    cursor: none;
+}
+
+.dialouge {
+    color: blue;
+    font-style: italic;
+}
+
 .links {
     display: flex;
-    gap: 20px;
+    gap: 0px;
     cursor: none;
 }
 
 .link {
-    padding: 10px 20px;
-    background: #007bff;
+    margin: 1%;
+    padding: 10px 5%;
+    background: rgb(65, 65, 65);
     color: white;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 1px;
     user-select: none;
     text-align: center;
     transition: background 0.3s ease;
@@ -38,12 +70,23 @@ body {
 }
 
 .link:hover {
-    background: #007bff;
+    background: rgb(65, 65, 65);
     cursor: none;
 }
 
 .platform-zone {
     position: absolute;
-    background-color: blue;
+    background-color: red;
     height: 20px;
+}
+
+.flex-container {
+    display: flex;
+    gap: 20px; /* Space between columns */
+}
+
+.column {
+    flex: 1; /* Makes columns equal width */
+    padding: 20px;
+
 }

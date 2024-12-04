@@ -3,16 +3,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>CAT</title>
+    <title>Interactive Character Navigation</title>
 </head>
-<body>
-    <div class="character"></div>
+<header>
     <div class="links">
-        <div class="link" data-link="index.html">Back</div>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi ea exercitationem quasi, adipisci tenetur cum quam reprehenderit, distinctio asperiores ex enim optio, architecto fuga id nemo? Asperiores optio enim accusantium.</p>
-
-
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta, quibusdam debitis modi odio fugit pariatur repellendus earum iusto. Corporis tempora voluptas hic? Praesentium, inventore! Laudantium corrupti nam beatae repudiandae est.</p>
+        <h2 class="headerTitle">Dorms</h1>
+        <h2 class="link" data-link="home.html">Back</h1>
+        <h2 class="headerTitle">er//r</h1>
+    </div>
+</header>
+<div id="platforms">
+    <div class="character"></div>
+    <div class="platform-zone" style="left: 40%; top: 300px; width: 60%; height: 5px; background-color: black;"></div>
+    <div class="platform-zone" style="left: 40%; top: 600px; width: 60%; height: 5px; background-color: black;"></div>
+    <div class="platform-zone" style="left: 40%; top: 900px; width: 60%; height: 5px; background-color: black;"></div>
+    <div class="platform-zone" style="left: 20%; top: 150px; width: 10%; height: 5px; background-color: black;"></div>
+    <div class="platform-zone" style="left: 20%; top: 450px; width: 10%; height: 5px; background-color: black;"></div>
+    <div class="platform-zone" style="left: 20%; top: 750px; width: 10%; height: 5px; background-color: black;"></div>
+    <div class="platform-zone" style="left: 40%; top: 300px; width: 5px; height: 100px; background-color: black;"></div>
+    <div class="platform-zone" style="left: 40%; top: 600px; width: 5px; height: 100px; background-color: black;"></div>
+    <div class="platform-zone" style="left: 40%; top: 900px; width: 5px; height: 38px; background-color: black;"></div>
+    <div class="platform-zone" style="position: absolute; left: 1000px; top: 540px; width: 200px; height: 5px">
+        <div style="position: absolute; left: 180px; top: 0px; width: 5px; height: 60px; background-color: black;"></div>
+        <div style="position: absolute; left: 15px; top: 0px; width: 5px; height: 60px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 200px; height: 5px; background-color: black;"></div>
+    </div>
+    <div class="platform-zone" style="position: absolute; left: 1250px; top: 570px; width: 80px; height: 5px">
+        <div style="position: absolute; left: 80px; top: -50px; width: 5px; height: 80px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 5px; height: 30px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 80px; height: 5px; background-color: black;"></div>
+    </div>
+    <div class="platform-zone" style="position: absolute; left: 1700px; top: 540px; width: 200px; height: 5px">
+        <div style="position: absolute; left: 195px; top: -30px; width: 5px; height: 90px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 5px; height: 60px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 200px; height: 50px; background-color: black;"></div>
+    </div>
+    <div class="platform-zone" style="position: absolute; left: 1000px; top: 840px; width: 200px; height: 5px">
+        <div style="position: absolute; left: 180px; top: 0px; width: 5px; height: 60px; background-color: black;"></div>
+        <div style="position: absolute; left: 15px; top: 0px; width: 5px; height: 60px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 200px; height: 5px; background-color: black;"></div>
+    </div>
+    <div class="platform-zone" style="position: absolute; left: 1250px; top: 870px; width: 80px; height: 5px">
+        <div style="position: absolute; left: 80px; top: -50px; width: 5px; height: 80px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 5px; height: 30px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 80px; height: 5px; background-color: black;"></div>
+    </div>
+    <div class="platform-zone" style="position: absolute; left: 1700px; top: 840px; width: 200px; height: 5px">
+        <div style="position: absolute; left: 195px; top: -30px; width: 5px; height: 90px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 5px; height: 60px; background-color: black;"></div>
+        <div style="position: absolute; left: 0px; top: 0px; width: 200px; height: 50px; background-color: black;"></div>
+    </div>
+</div>
+<body>
+    <div class="content">
+        <p class="dialouge">This is where I sleep!</p>
+        <div class="flex-container">        
+            <div class="column" style="flex: 1;"> <h1 style=" text-align: center;">The Dorms</h1> Here is where the webcats go and rest. They have built themselves an apartment complex with scrap coding! They have also made sure not to use images because it takes up too much data that way they can quick rest a lot faster! Due to the errors of the website it seems like there are no other webcats visable right now. </div>
+            <div class="column" style="flex: 6"><h1></h1></div>
+        </div>
+    </div>
+    <div style="height: 560px;"></div>
     <script src="script.js"></script>
 </body>
+<footer>
+    <div class="platform-zone" style="left: 400px; top: 400px; width: 100%; height: 5px; background-color: rgba(0, 0, 0, 0); position: sticky;"></div>
+    <h2>hello</h2>
+</footer>
 </html>
