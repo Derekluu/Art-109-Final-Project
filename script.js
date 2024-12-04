@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const character = document.querySelector('.character');
     const links = document.querySelectorAll('.link');
     const platforms = document.querySelectorAll('.platform-zone');
-    //test
+    
     let x = window.innerWidth / 2 - 25;  // Initial X position
     let y = window.innerHeight / 2 - 25; // Initial Y position
     const step = 8; // Horizontal movement step in pixels
@@ -12,54 +12,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const keys = {}; // Object to track pressed keys
     let onGround = false; // To check if character is on a platform or ground
 
-    // Make sure to adjust the ground level and body height for scrolling
     const groundLevel = document.documentElement.scrollHeight - character.offsetHeight;
     document.body.style.height = `${document.documentElement.scrollHeight}px`;
 
-    const url = window.location.pathname; // Get the current page's path
-
+    const url = window.location.pathname;
+    // Set spawn positions based on page URL
     if (url.includes("page1.html")) {
-        x = 800; // Spawn coordinates for page1.html
+        x = 800;
         y = 100;
-    }    
-     else if (url.includes("page1-1.html")) {
-        x = 800; // Spawn coordinates for page1.html
-        y = 200;
     } else if (url.includes("page2.html")) {
         x = 300;
-        y = 400;  
-    } else if (url.includes("page2-1.html")) {
-        x = 300;
-        y = 400;  
+        y = 400;
     } else if (url.includes("home.html")) {
-            x = 100; 
-            y = 100;
-    } else if (url.includes("page3.html")) {
-        x = window.innerWidth / 2 - 25;
-        y = 400;
-        gravity = 0.1;
-        jumpStrength = -15
-    } else if (url.includes("page3-1.html")) {
-        x = window.innerWidth / 2 - 25;
-        y = 400;
-        gravity = 0.1;
-        jumpStrength = -15
-    } else if (url.includes("page4.html")) {
-        x = 100; 
-        y = 100;
-    } else if (url.includes("page4-1.html")) {
-        x = 100; 
+        x = 100;
         y = 100;
     } else {
-        x = window.innerWidth / 2 - 25; // Default position
+        x = window.innerWidth / 2 - 25;
         y = window.innerHeight / 2 - 25;
     }
-    
+
     // Set the initial position
     character.style.left = `${x}px`;
     character.style.top = `${y}px`;
 
-    
     // Check for collision with links
     function checkCollisionWithLinks() {
         const charRect = character.getBoundingClientRect();
@@ -78,22 +53,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check for collision with platforms
     function checkCollisionWithPlatforms() {
-        onGround = false; // Reset ground status
+        onGround = false;
 
         platforms.forEach(platform => {
-            // Get platform's absolute position
             const platformTop = platform.offsetTop;
             const platformBottom = platformTop + platform.offsetHeight;
             const platformLeft = platform.offsetLeft;
             const platformRight = platformLeft + platform.offsetWidth;
 
-            // Character's absolute position and hitbox dimensions
             const characterTop = y;
             const characterBottom = y + character.offsetHeight;
             const characterLeft = x - 30;
             const characterRight = x + character.offsetWidth - 70;
 
-            // Top collision (landing on platform)
             if (
                 characterRight > platformLeft &&
                 characterLeft < platformRight &&
@@ -106,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 onGround = true;
             }
 
-            // Bottom collision (hitting the underside of the platform)
             if (
                 characterRight > platformLeft &&
                 characterLeft < platformRight &&
@@ -115,29 +86,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 velocityY < 0
             ) {
                 y = platformBottom;
-                velocityY = 1; // Apply a slight downward force to simulate falling off
+                velocityY = 1;
             }
 
-            // Left collision (Character's right side collides with platform's left side)
             if (
                 characterBottom > platformTop &&
                 characterTop < platformBottom &&
                 characterRight > platformLeft &&
-                characterLeft < platformLeft && // Check if character is on the left of the platform
-                characterRight - step <= platformLeft // Check if character's right side will collide with platform's left side
+                characterLeft < platformLeft &&
+                characterRight - step <= platformLeft
             ) {
-                x = platformLeft - character.offsetWidth + 70; // Stop movement and align character to platform
+                x = platformLeft - character.offsetWidth + 70;
             }
 
-            // Right collision (Character's left side collides with platform's right side)
             if (
                 characterBottom > platformTop &&
                 characterTop < platformBottom &&
                 characterLeft < platformRight &&
-                characterRight > platformRight && // Check if character is on the right of the platform
-                characterLeft + step >= platformRight // Check if character's left side will collide with platform's right side
+                characterRight > platformRight &&
+                characterLeft + step >= platformRight
             ) {
-                x = platformRight + 30; // Stop movement and align character to platform
+                x = platformRight + 30;
             }
         });
     }
@@ -167,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         checkCollisionWithLinks();
         checkCollisionWithPlatforms();
 
-        scrollToKeepCharacterInView(); // Ensure the page scrolls with character
+        scrollToKeepCharacterInView();
     }
 
     function scrollToKeepCharacterInView() {
@@ -175,18 +144,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const viewportBottom = window.innerHeight;
 
         if (charRect.bottom > viewportBottom - 200) {
-            window.scrollBy(0, charRect.bottom - viewportBottom + 200); // Scroll down
+            window.scrollBy(0, charRect.bottom - viewportBottom + 200);
         }
         if (charRect.top < 300) {
-            window.scrollBy(0, charRect.top - 300); // Scroll up if needed
+            window.scrollBy(0, charRect.top - 300);
         }
     }
 
     document.addEventListener('keydown', (event) => keys[event.key] = true);
     document.addEventListener('keyup', (event) => keys[event.key] = false);
 
-    function gameLoop() {
-        updatePosition();
+    // Setting the target frame rate (e.g., 60 FPS)
+    const targetFrameRate = 120;
+    const targetTimePerFrame = 1000 / targetFrameRate; // Time per frame in milliseconds
+
+    let lastTime = 0;
+    function gameLoop(timestamp) {
+        const deltaTime = timestamp - lastTime;
+
+        if (deltaTime >= targetTimePerFrame) {
+            updatePosition();
+            lastTime = timestamp; // Update lastTime only when the frame has passed
+        }
+
         requestAnimationFrame(gameLoop);
     }
 
